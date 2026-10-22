@@ -1,0 +1,88 @@
+<!doctype html><html lang="zh-Hant-HK"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>彩虹機｜找因數・互動小工具</title>
+<style>
+:root{--bg:#f3f7f6;--grid:rgba(58,110,118,.075);--surface:#fff;--surface-2:#edf3f2;--ink:#1d2b31;--muted:#5a6a70;--line:#d3dfdd;--factor:#2463a8;--factor-soft:#e2edfa;--a:#25845a;--a-soft:#e0f2e8;--b:#7347b8;--b-soft:#eee6fa;--ok:#25845a;--ok-soft:#e0f2e8;--bad:#c03a3a;--bad-soft:#fbe6e6;--star:#e3a00f;--star-soft:#fdf3d7;--display:"LXGW WenKai TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;--body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;--num:"Fredoka","Noto Sans TC",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12191c;--grid:rgba(140,190,195,.06);--surface:#1a2427;--surface-2:#223035;--ink:#e6eef0;--muted:#9db0b5;--line:#33454b;--factor:#72aaf0;--factor-soft:#1b2d44;--a:#5cc68f;--a-soft:#173327;--b:#ae8ceb;--b-soft:#2a2040;--ok:#5cc68f;--ok-soft:#173327;--bad:#f07a7a;--bad-soft:#3a1d1f;--star:#f4bf3a;--star-soft:#3a2f14;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12191c;--grid:rgba(140,190,195,.06);--surface:#1a2427;--surface-2:#223035;--ink:#e6eef0;--muted:#9db0b5;--line:#33454b;--factor:#72aaf0;--factor-soft:#1b2d44;--a:#5cc68f;--a-soft:#173327;--b:#ae8ceb;--b-soft:#2a2040;--ok:#5cc68f;--ok-soft:#173327;--bad:#f07a7a;--bad-soft:#3a1d1f;--star:#f4bf3a;--star-soft:#3a2f14;color-scheme:dark}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.7;margin:0}
+.wrap{max-width:860px;margin:0 auto;padding:20px 16px 60px}
+h1{font-family:var(--display);font-size:clamp(30px,5vw,44px);margin:0}h2{font-family:var(--display);font-size:clamp(24px,3.6vw,32px);margin:0}
+.n{font-family:var(--num);font-weight:600;font-variant-numeric:tabular-nums}.f{color:var(--factor);font-weight:700}.muted{color:var(--muted)}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 20px;margin-bottom:14px}
+.sub{color:var(--muted);font-size:16px}
+section.page{display:grid;gap:22px}.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}.card>*+*{margin-top:12px}.lead{font-size:20px}
+.caption{font-size:20px;padding:12px 16px;border-radius:12px;background:var(--surface-2)}.caption.okc{background:var(--ok-soft)}.caption.badc{background:var(--bad-soft)}
+.btn{border:2px solid var(--ink);background:var(--surface);color:var(--ink);font:700 18px var(--body);padding:8px 18px;border-radius:12px;cursor:pointer}.btn.primary{background:var(--ink);color:var(--bg)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+input.ans{font:700 26px var(--num);padding:8px 14px;border:2px solid var(--line);border-radius:12px;width:7em;text-align:center;background:var(--surface);color:var(--ink)}
+.rbwrap{margin-top:6px}.rbwrap svg{display:block;width:100%;height:auto}.rbwrap path{fill:none;stroke-width:2.5;opacity:.35}.rbwrap path[data-a="1"]{stroke:var(--factor)}.rbwrap path[data-a="2"]{stroke:var(--a)}.rbwrap path[data-a="3"]{stroke:var(--b)}.rbwrap path.on{opacity:1;stroke-width:4}
+.rbrow{display:grid;grid-template-columns:repeat(6,1fr)}.rbnum{font:700 26px var(--num);border:2px solid var(--factor);background:var(--surface);color:var(--ink);border-radius:12px;padding:6px 4px;margin:0 6px;cursor:pointer}.rbnum.on{background:var(--factor);color:#fff;border-color:var(--factor)}.rbnum.on[data-p="2"]{background:var(--a);border-color:var(--a)}.rbnum.on[data-p="3"]{background:var(--b);border-color:var(--b)}.rbrow.many .rbnum{font-size:20px;margin:0 2px}
+details.teacher{font-size:16px;color:var(--muted)}details.teacher summary{cursor:pointer;font-weight:700}
+</style></head>
+<body><div class="wrap">
+<header class="top"><div><h1>🌈 彩虹機</h1><div class="sub">找因數・互動小工具｜由 1 開始配對，就不會遺漏</div></div></header>
+<section class="page">
+<div class="card"><h2>先睇例子：12 的因數彩虹</h2>
+<div class="rbwrap"><svg id="rbSvg" viewBox="0 0 600 130" aria-hidden="true"><path data-a="1" d="M50,122 Q300,8 550,122"/><path data-a="2" d="M150,122 Q300,52 450,122"/><path data-a="3" d="M250,122 Q300,88 350,122"/></svg>
+<div class="rbrow" id="rbRow"><button class="rbnum" data-v="1" data-p="1">1</button><button class="rbnum" data-v="2" data-p="2">2</button><button class="rbnum" data-v="3" data-p="3">3</button><button class="rbnum" data-v="4" data-p="3">4</button><button class="rbnum" data-v="6" data-p="2">6</button><button class="rbnum" data-v="12" data-p="1">12</button></div></div>
+<div class="caption" id="rbCap">按一按數字，看看它的配對（例如 2 × 6 = 12）。</div></div>
+<div class="card"><h2>彩虹機：輸入任何數</h2>
+<p class="lead">輸入一個數（2–99），按「畫彩虹」，即時畫出它的因數彩虹。一次最多可輸入 4 個數（用空格或逗號分開），並排比較。</p>
+<div class="controls"><input class="ans" id="rbN" style="width:10em" inputmode="numeric" placeholder="例如 12 18"><button class="btn primary" id="rbGo">畫彩虹</button></div>
+<div id="rbMulti"></div>
+<div class="caption" id="rbCap2">輸入數字後按「畫彩虹」。若因數有單數個，中間那個會自己配對（例如 6 × 6 = 36）。</div></div>
+<details class="teacher"><summary>教學小提示（老師睇）</summary>請學生完整說一次：「因為 6 × 2 = 12，所以 6 是 12 的因數。」重點：1 和它本身都要數，因數是成雙成對出現的。</details>
+</section></div>
+<script>(function(){"use strict";
+var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var CHEER=["不要緊，再試一次，你一定做得到！","答錯也是學習的一部分，再想一想！","你已經很接近了，不要放棄！","每一次嘗試都是進步，繼續努力！","慢慢來，再檢查一次！","老師相信你，再挑戰一次！"];function cheer(){return CHEER[Math.floor(Math.random()*CHEER.length)];}
+function factors(n){var r=[];for(var i=1;i<=n;i++)if(n%i===0)r.push(i);return r;}
+var RBP={1:12,12:1,2:6,6:2,3:4,4:3};
+$$("#rbRow .rbnum").forEach(function(b){b.onclick=function(){var v=+b.dataset.v,w=RBP[v];$$("#rbRow .rbnum").forEach(function(x){x.classList.toggle("on",+x.dataset.v===v||+x.dataset.v===w);});$$("#rbSvg path").forEach(function(p){p.classList.toggle("on",+p.dataset.a===Math.min(v,w));});$("#rbCap").innerHTML="因為 <strong class='n'>"+Math.min(v,w)+" × "+Math.max(v,w)+" = 12</strong>，所以 "+v+" 和 "+w+" 都是 12 的因數。";};});
+var RCC=["var(--factor)","var(--a)","var(--b)","var(--star)"];
+function num(s){return ((s)+"").replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248);}).replace(/[\s,，、]/g,"").trim();}
+$("#rbGo").onclick=function(){
+var raw=($("#rbN").value+"").replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248);}).trim();
+var toks=raw.split(/[\s,，、;；]+/).filter(function(t){return t.length;});
+var seen={},Ns=[];
+toks.forEach(function(t){if(/^\d+$/.test(t)){var n=parseInt(t,10);if(n>=2&&n<=99&&!seen[n]){seen[n]=1;Ns.push(n);}}});
+var cap=$("#rbCap2"),box=$("#rbMulti");box.innerHTML="";
+if(!Ns.length){cap.className="caption badc";cap.innerHTML="請輸入 2 至 99 的整數（例如 12 18）。<br>"+cheer();return;}
+if(Ns.length>4)Ns=Ns.slice(0,4);
+cap.className="caption";cap.innerHTML="共畫出 "+Ns.length+" 道彩虹："+Ns.join("、")+"。按一按數字，看看它的配對。";
+Ns.forEach(function(N){buildRainbow(box,N);});
+};
+$("#rbN").addEventListener("keydown",function(e){if(e.key==="Enter")$("#rbGo").click();});
+function buildRainbow(box,N){
+var fa=factors(N),k=fa.length;
+var card=document.createElement("div");card.className="card";card.style.marginTop="12px";
+card.innerHTML="<h2><span class='n'>"+N+"</span> 的因數彩虹</h2>";
+var wrap=document.createElement("div");wrap.className="rbwrap";
+var NS="http://www.w3.org/2000/svg";
+var svg=document.createElementNS(NS,"svg");svg.setAttribute("viewBox","0 0 600 130");svg.setAttribute("aria-hidden","true");
+var row=document.createElement("div");row.className="rbrow";
+wrap.appendChild(svg);wrap.appendChild(row);card.appendChild(wrap);
+var cp=document.createElement("div");cp.className="caption";card.appendChild(cp);
+box.appendChild(card);
+row.style.gridTemplateColumns="repeat("+k+",1fr)";row.classList.toggle("many",k>8);
+var pair={};for(var i=0;i<Math.floor(k/2);i++){pair[fa[i]]=fa[k-1-i];pair[fa[k-1-i]]=fa[i];}
+var mid=k%2?fa[(k-1)/2]:null;
+fa.forEach(function(v){var b=document.createElement("button");b.className="rbnum";b.type="button";b.textContent=v;b.dataset.v=v;b.onclick=function(){light(v);};row.appendChild(b);});
+for(var j=0;j<Math.floor(k/2);j++){var x1=(j+0.5)*600/k,x2=(k-0.5-j)*600/k,yTop=Math.min(8+j*24,100);var p=document.createElementNS(NS,"path");p.setAttribute("d","M"+x1+",122 Q300,"+yTop+" "+x2+",122");p.dataset.a=j;p.style.stroke=RCC[j%RCC.length];p.style.strokeWidth="2.5";p.style.opacity=".35";p.style.fill="none";svg.appendChild(p);}
+cp.className="caption okc";cp.innerHTML="<strong class='n'>"+N+"</strong> 的因數有："+fa.join("、")+"。"+(mid?"其中 <strong class='n'>"+mid+"</strong> 是自己配對（"+mid+" × "+mid+" = "+N+"）。":"");
+function light(v){
+var w=pair[v];
+var btns=row.querySelectorAll(".rbnum");
+for(var a=0;a<btns.length;a++){var x=btns[a];var on=(+x.dataset.v===v||+x.dataset.v===w);x.classList.remove("on");x.style.background="";x.style.color="";x.style.borderColor="";if(on){var idx=Math.min(fa.indexOf(v),fa.indexOf(w));x.style.background=RCC[idx%RCC.length];x.style.color="#fff";x.style.borderColor="transparent";}}
+var paths=svg.querySelectorAll("path");
+for(var q=0;q<paths.length;q++){var pp=paths[q];var on2=(+pp.dataset.a===Math.min(fa.indexOf(v),fa.indexOf(w)));pp.style.opacity=on2?"1":".35";pp.style.strokeWidth=on2?"4":"2.5";}
+if(w)cp.innerHTML="因為 <strong class='n'>"+Math.min(v,w)+" × "+Math.max(v,w)+" = "+N+"</strong>，所以 "+v+" 和 "+w+" 都是 "+N+" 的因數。";
+else cp.innerHTML="<strong class='n'>"+v+"</strong> 自己配對："+v+" × "+v+" = "+N+"。";}
+}
+var tb=document.createElement("button");tb.className="btn";tb.style.cssText="font-size:15px;padding:4px 12px";tb.title="切換深淺色";
+function paint(){tb.textContent=document.documentElement.getAttribute("data-theme")==="dark"?"☀️":"🌙";}
+tb.onclick=function(){var d=document.documentElement.getAttribute("data-theme")==="dark";document.documentElement.setAttribute("data-theme",d?"light":"dark");try{localStorage.setItem("lesson-theme",d?"light":"dark")}catch(e){}paint();};
+document.querySelector("header.top").appendChild(tb);
+try{var th=localStorage.getItem("lesson-theme");if(th)document.documentElement.setAttribute("data-theme",th);}catch(e){}paint();
+})();
+</script></body></html>
