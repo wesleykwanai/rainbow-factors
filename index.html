@@ -28,7 +28,7 @@ details.teacher{font-size:16px;color:var(--muted)}details.teacher summary{cursor
 <div class="caption" id="rbCap">按一按數字，看看它的配對（例如 2 × 6 = 12）。</div></div>
 <div class="card"><h2>彩虹機：輸入任何數</h2>
 <p class="lead">輸入一個數（2–99），按「畫彩虹」，即時畫出它的因數彩虹。一次最多可輸入 4 個數（用空格或逗號分開），並排比較。</p>
-<div class="controls"><input class="ans" id="rbN" style="width:10em" inputmode="numeric" placeholder="例如 12 18"><button class="btn primary" id="rbGo">畫彩虹</button></div>
+<div class="controls"><input class="ans" id="rbN" style="width:10em" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" placeholder="例如 12 18"><button class="btn" id="rbSp" type="button" title="插入分隔">·</button><button class="btn primary" id="rbGo">畫彩虹</button></div>
 <div id="rbMulti"></div>
 <div class="caption" id="rbCap2">輸入數字後按「畫彩虹」。若因數有單數個，中間那個會自己配對（例如 6 × 6 = 36）。</div></div>
 <details class="teacher"><summary>教學小提示（老師睇）</summary>請學生完整說一次：「因為 6 × 2 = 12，所以 6 是 12 的因數。」重點：1 和它本身都要數，因數是成雙成對出現的。</details>
@@ -53,6 +53,7 @@ cap.className="caption";cap.innerHTML="共畫出 "+Ns.length+" 道彩虹："+Ns.
 Ns.forEach(function(N){buildRainbow(box,N);});
 };
 $("#rbN").addEventListener("keydown",function(e){if(e.key==="Enter")$("#rbGo").click();});
+$("#rbSp").onclick=function(){var i=$("#rbN");var p=i.selectionStart==null?i.value.length:i.selectionStart;i.value=i.value.slice(0,p)+" "+i.value.slice(i.selectionEnd==null?p:i.selectionEnd);i.focus();i.setSelectionRange(p+1,p+1);};
 function buildRainbow(box,N){
 var fa=factors(N),k=fa.length;
 var card=document.createElement("div");card.className="card";card.style.marginTop="12px";
